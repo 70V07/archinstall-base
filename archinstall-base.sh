@@ -1,4 +1,5 @@
 #!/bin/bash
+
 echo 
 echo "______________________________________________________/"
 echo "_____________________________________________________/oo"
@@ -13,10 +14,10 @@ echo "_____________________________________________/000000000ooooooooo"
 echo "____________________________________________/0000000'____'ooooooo"
 echo "___________________________________________/0000000_______:ooooooo"
 echo "__________________________________________/00000000________oooooooo"
-echo "_________________________________________/00000000,________ooooooooo"
-echo "________________________________________/00000007^___________^ooooooo"
-echo "_______________________________________/0007^___________________^ooooo"
-echo "______________________________________/p^___________________________^oq"
+echo "_________________________________________/00000000,________.oooooooo"
+echo "________________________________________/000007^______________^oooooo"
+echo "_______________________________________/0007^____________________^oooo"
+echo "______________________________________/po^__________________________^oq"
 echo 
 echo " L i n u x  A r c h  64bit  PCdesk   m a i n  s i t e  : archlinux.org"
 echo " ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀"
@@ -33,3 +34,26 @@ read -p "[ temp ] keyboard layout: " KEYL && loadkeys $KEYL
 echo "[ temp ] clock syncronization" && timedatectl set-ntp true
 
 # tools for partitioning
+
+PS3='[ menu ] choose partition tool (1) status (2) fdisk (3) cfdisk (4) continue: '
+optsp=("status" "fdisk" "cfdisk" "continue") 
+select opt in "${optsp[@]}"
+do
+    case $opt in
+        "status")
+            fdisk -l
+            ;;
+        "fdisk")
+            fdisk /dev/sda
+            ;; 
+        "cfdisk")
+            cfdisk
+            ;;
+        "continue")
+            break
+            ;;
+        *) echo "invalid option $REPLY"
+            ;;
+    esac 
+done
+
