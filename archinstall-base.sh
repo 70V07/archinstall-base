@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sed -i -e '$a\' file
+
 echo 
 echo "______________________________________________________/"
 echo "_____________________________________________________/oo"
@@ -57,3 +59,20 @@ do
     esac 
 done
 
+# mounting
+
+echo "[ .... ]" mkdir /mnt/boot
+echo "[ .... ]" mount /dev/sda1 /mnt/boot
+echo "[ .... ]" mount /dev/sda3 /mnt
+
+# base packages, fstab, chroot
+
+echo "[ .... ]" pacstrap /mnt base base-devel
+echo "[ .... ]" genfstab -U /mnt >> /mnt/etc/fstab
+echo "[ .... ]" arch-chroot /mnt
+echo "[ .... ]" pacman -S nano dhcpcd dbus-broker
+
+# time zone, hardware clock
+
+echo "[ .... ]" 
+echo "[ .... ]" 
