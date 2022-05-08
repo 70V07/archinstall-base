@@ -35,26 +35,34 @@ echo "[ temp ] clock syncronization" && timedatectl set-ntp true
 
 # tools for partitioning
 
+# help from here: https://unix.stackexchange.com/questions/701843/how-to-bash-script-menu-in-one-row-only
+
 PS3='[ menu ] choose partition tool (1) status (2) fdisk (3) cfdisk (4) continue: '
-optsp=("status" "fdisk" "cfdisk" "continue") 
-select opt in "${optsp[@]}"
+optsp=("status" "fdisk" "cfdisk" "continue")
+while :
 do
-    case $opt in
-        "status")
+    printf '%s' "$PS3"
+    for ((i = 0; i < ${#options[@]}; i++))
+    do
+        printf ' (%d) %s' $((i+1)) "${options[i]}"
+    done
+    read -p ': ' opt
+    case "$opt" in
+        1|"status")
             fdisk -l
             ;;
-        "fdisk")
+        2|"fdisk")
             fdisk /dev/sda
-            ;; 
-        "cfdisk")
+            ;;
+        3|"cfdisk")
             cfdisk
             ;;
-        "continue")
+        4|"continue")
             break
             ;;
-        *) echo "invalid option $REPLY"
+        *) echo "invalid option $opt"
             ;;
-    esac 
+    esac
 done
 
 # mounting
