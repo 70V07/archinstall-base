@@ -57,7 +57,7 @@ read -p "Press enter to continue"
 
 # big help from here: https://unix.stackexchange.com/questions/701843/how-to-bash-script-menu-in-one-row-only
 
-PS3='[ menu ] choose partition tool (1) status (2) fdisk (3) cfdisk (4) continue: '
+PS3='[ menu ] choose partition tool '
 options=("status" "fdisk" "cfdisk" "continue")
 while :
 do
