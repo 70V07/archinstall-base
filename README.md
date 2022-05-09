@@ -3,6 +3,8 @@
 
 *I do not take any responsibility (it is for didactic personal purphoses)*
 
+**files is in constant change (I strike this when I finish the changes) !**
+
 **for those who want to try the script, from shell (in Arch live medium):**
 ```
   cd \
@@ -17,4 +19,3 @@
   
   bash archinstall-base.sh
 ```
-**the files is in constant change (I strike this phrase when I finish the changes) !**
