@@ -17,4 +17,4 @@
   
   bash archinstall-base.sh
 ```
-**the files is in constant change (I strike this phrase when I finish the changes)!**
+**the files is in constant change (I strike this phrase when I finish the changes) !**
