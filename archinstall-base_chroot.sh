@@ -9,7 +9,7 @@ echo "[ work ] setup time zone" && ln -sf /usr/share/zoneinfo/$TIMEZONE /etc/loc
 echo "[ work ] syncronize hardware time" && hwclock --systohc
 echo "[ show ] system time" && timedatectl show
 echo "[ show ] hardware time" && hwclock --show
-echo 
+echo #pause here and add find how tabs before all outpouts on last 2 commands
 
 # locale, keymap
 
