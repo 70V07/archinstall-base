@@ -1,7 +1,8 @@
 
 ### *public just to bypass authentication*
 
-**I do not take any responsibility, it is for personal use, but for those who want to try the script, from shell (in Arch live medium):**
+**I do not take any responsibility, it is for personal use
+for those who want to try the script, from shell (in Arch live medium):**
 ```
   cd \
   
