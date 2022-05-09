@@ -38,12 +38,14 @@ KEYMAP='it'
 
 # if setting manual comment auto configuration from script (and viceversa)
 #read -p "[ temp ] keyboard layout: " KEYMAP && loadkeys $KEYMAP
-echo "[ temp ] keyboard layout" && loadkeys $KEYMAP 
+echo "[ temp ] keyboard layout" && loadkeys $KEYMAP
+#read -p "Press enter to continue" #debug
 echo 
 
 # temporary clock syncronization
 
 echo "[ temp ] clock syncronization" && timedatectl set-ntp true
+#read -p "Press enter to continue" #debug
 echo 
 
 # partitioning tools
@@ -94,12 +96,15 @@ echo "[ work ] format partition boot" && mkfs.ext2 /dev/sda1
 echo "[ work ] format partition main" && mkfs.ext4 /dev/sda3
 echo "[ work ] format partition swap" && mkswap /dev/sda2
 echo "[ work ] activate swap" && swapon /dev/sda2
+#read -p "Press enter to continue" #debug
+echo 
 
 # mounting
 
 echo "[ work ] mkdir /mnt/boot" && mkdir /mnt/boot
 echo "[ work ] mount /dev/sda1 /mnt/boot" && mount /dev/sda1 /mnt/boot # missing UEFI alternative
 echo "[ work ] mount /dev/sda3 /mnt" && mount /dev/sda3 /mnt
+#read -p "Press enter to continue" #debug
 echo 
 
 # base packages, fstab, chroot
@@ -108,6 +113,7 @@ echo "[ work ] install base packages" && pacstrap /mnt base base-devel
 echo "[ work ] genfstab" && genfstab -U /mnt >> /mnt/etc/fstab
 echo "[ work ] arch-chroot" && arch-chroot /mnt
 echo "[ work ] install editor and network utility" && pacman -S nano dhcpcd dbus-broker
+#read -p "Press enter to continue" #debug
 echo 
 
 # time zone, hardware clock
@@ -116,6 +122,7 @@ echo "[ work ] setup time zone" && ln -sf /usr/share/zoneinfo/$TIMEZONE /etc/loc
 echo "[ work ] syncronize hardware time" && hwclock --systohc
 echo "[ show ] system time" && timedatectl show
 echo "[ show ] hardware time" && hwclock --show
+#read -p "Press enter to continue" #debug
 echo 
 
 # locale, keymap
@@ -124,6 +131,7 @@ echo "[ work ] locale" && sed -i "/^#$LOCALE/ c$LOCALE" /etc/locale.gen
 echo "[ work ] locale" && locale-gen
 echo "[ work ] locale" && echo LANG=$LANGUAGE > /etc/locale.conf
 echo "[ work ] keymap" && echo KEYMAP=$KEYMAP > /etc/vconsole.conf
+#read -p "Press enter to continue" #debug
 echo 
 
 # hostname, password
@@ -131,6 +139,7 @@ echo
 echo "[ work ] hostname" && echo $HOSTNAME > /etc/hostname
 echo -n "[ work ] USER ─ " && passwd $USERNAME
 echo -n "[ work ] ROOT ─ " && passwd root
+#read -p "Press enter to continue" #debug
 echo 
 
 # boot loader
@@ -141,6 +150,7 @@ echo "[ work ] boot" && pacman -S grub os-prober
 echo "[ work ] boot" && grub-install $DRIVE
 #echo "[ work ] boot" && grub-install --efi--directory=/efi # UEFI
 echo "[ work ] boot" && grub-mkconfig -o /boot/grub/grub.cfg
+#read -p "Press enter to continue" #debug
 echo
 
 echo now reboot and bypass or disconnect installation support
