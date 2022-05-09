@@ -11,7 +11,7 @@ echo "_______________________________________________/0000o'oooooooo"
 echo "______________________________________________/0000000ooooooooo"
 echo "_____________________________________________/000000000ooooooooo"
 echo "____________________________________________/0000000'____'ooooooo"
-echo "___________________________________________/0000000_______:ooooooo"
+echo "___________________________________________/0000000_______.ooooooo"
 echo "__________________________________________/00000000________oooooooo"
 echo "_________________________________________/00000000,________.oooooooo"
 echo "________________________________________/000007^______________^oooooo"
@@ -42,13 +42,8 @@ echo "[ temp ] keyboard layout" && loadkeys $KEYMAP
 
 # temporary clock syncronization
 
-echo "[ temp ] clock syncronization"
-{
-    timedatectl set-ntp true
-} &> /dev/null
+echo "[ temp ] clock syncronization" && timedatectl set-ntp true # find how wait all output before continue
 echo 
-
-#debug#read -p "Press enter to continue"
 
 # partitioning tools
 
@@ -57,7 +52,7 @@ echo "[ info ] the script work with this table"
 echo "[ info ] $DRIVE 1 as boot"
 echo "[ info ] $DRIVE 2 as swap"
 echo "[ info ] $DRIVE 3 as main"
-read -p "Press enter to continue"
+read -p "press enter to continue"
 
 # big help from here: https://unix.stackexchange.com/questions/701843/how-to-bash-script-menu-in-one-row-only
 
@@ -98,7 +93,6 @@ echo "[ work ] format partition boot" && mkfs.ext2 /dev/sda1
 echo "[ work ] format partition main" && mkfs.ext4 /dev/sda3
 echo "[ work ] format partition swap" && mkswap /dev/sda2
 echo "[ work ] activate swap" && swapon /dev/sda2
-#debug#read -p "Press enter to continue"
 echo 
 
 # mounting
@@ -106,54 +100,12 @@ echo
 echo "[ work ] mkdir /mnt/boot" && mkdir /mnt/boot
 echo "[ work ] mount /dev/sda1 /mnt/boot" && mount /dev/sda1 /mnt/boot # missing UEFI alternative
 echo "[ work ] mount /dev/sda3 /mnt" && mount /dev/sda3 /mnt
-#debug#read -p "Press enter to continue"
 echo 
 
 # base packages, fstab, chroot
 
 echo "[ work ] install base packages" && pacstrap /mnt base base-devel
 echo "[ work ] genfstab" && genfstab -U /mnt >> /mnt/etc/fstab
-echo "[ work ] arch-chroot" && arch-chroot /mnt
-echo "[ work ] install editor and network utility" && pacman -S nano dhcpcd dbus-broker
-#debug#read -p "Press enter to continue"
-echo 
+echo "[ work ] arch-chroot" && arch-chroot /mnt / ./archinstall-base_chroot.sh
 
-# time zone, hardware clock
-
-echo "[ work ] setup time zone" && ln -sf /usr/share/zoneinfo/$TIMEZONE /etc/localtime
-echo "[ work ] syncronize hardware time" && hwclock --systohc
-echo "[ show ] system time" && timedatectl show
-echo "[ show ] hardware time" && hwclock --show
-#debug#read -p "Press enter to continue"
-echo 
-
-# locale, keymap
-
-echo "[ work ] locale" && sed -i "/^#$LOCALE/ c$LOCALE" /etc/locale.gen
-echo "[ work ] locale" && locale-gen
-echo "[ work ] locale" && echo LANG=$LANGUAGE > /etc/locale.conf
-echo "[ work ] keymap" && echo KEYMAP=$KEYMAP > /etc/vconsole.conf
-#debug#read -p "Press enter to continue"
-echo 
-
-# hostname, password
-
-echo "[ work ] hostname" && echo $HOSTNAME > /etc/hostname
-echo -n "[ work ] USER ─ " && passwd $USERNAME
-echo -n "[ work ] ROOT ─ " && passwd root
-#debug#read -p "Press enter to continue"
-echo 
-
-# boot loader
-
-# if UEFI uncomment not-UEFI (and viceversa)
-echo "[ work ] boot" && pacman -S grub os-prober
-#echo "[ work ] boot" && pacman -S grub efibootmgr # UEFI
-echo "[ work ] boot" && grub-install $DRIVE
-#echo "[ work ] boot" && grub-install --efi--directory=/efi # UEFI
-echo "[ work ] boot" && grub-mkconfig -o /boot/grub/grub.cfg
-#debug#read -p "Press enter to continue"
-echo
-
-echo now reboot and bypass or disconnect installation support
-echo
+# .... switch to archinstall-base_chroot.sh
