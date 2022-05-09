@@ -1,9 +1,9 @@
 
-### *public just to bypass authentication*
+### ! public just to bypass authentication
 
-**I do not take any responsibility, it is for personal use
+*I do not take any responsibility (it is for didactic personal purphoses)*
 
-for those who want to try the script, from shell (in Arch live medium):**
+**for those who want to try the script, from shell (in Arch live medium):**
 ```
   cd \
   
