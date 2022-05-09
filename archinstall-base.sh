@@ -1,5 +1,4 @@
 #!/bin/bash
-
 echo 
 echo "______________________________________________________/"
 echo "_____________________________________________________/oo"
@@ -25,20 +24,34 @@ echo " Marco Colonna  akaTOVOT  29/03/82   email :   arbitrio@altervista.com"
 echo " ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀"
 echo 
 
-# temporary setup of keyboard layout
+# auto configuration from script
 
-read -p "[ temp ] keyboard layout: " KEYL && loadkeys $KEYL
+DRIVE='/dev/sda'
+HOSTNAME='PCdesk'
+USERNAME='tovot'
+TIMEZONE='Europe/Rome'
+LANGUAGE='en_US.UTF-8'
+LOCALE='en_US.UTF-8 UTF-8'
+KEYMAP='it'
+
+# temporary setup keyboard layout
+
+# if setting manual comment auto configuration from script (and viceversa)
+#read -p "[ temp ] keyboard layout: " KEYMAP && loadkeys $KEYMAP
+echo "[ temp ] keyboard layout" && loadkeys $KEYMAP 
+echo 
 
 # temporary clock syncronization
 
 echo "[ temp ] clock syncronization" && timedatectl set-ntp true
+echo 
 
-# tools for partitioning
+# partitioning tools
 
-# help from here: https://unix.stackexchange.com/questions/701843/how-to-bash-script-menu-in-one-row-only
+# big help from here: https://unix.stackexchange.com/questions/701843/how-to-bash-script-menu-in-one-row-only
 
 PS3='[ menu ] choose partition tool (1) status (2) fdisk (3) cfdisk (4) continue: '
-optsp=("status" "fdisk" "cfdisk" "continue")
+options=("status" "fdisk" "cfdisk" "continue")
 while :
 do
     printf '%s' "$PS3"
@@ -46,13 +59,14 @@ do
     do
         printf ' (%d) %s' $((i+1)) "${options[i]}"
     done
+    
     read -p ': ' opt
     case "$opt" in
         1|"status")
             fdisk -l
             ;;
         2|"fdisk")
-            fdisk /dev/sda
+            fdisk $DRIVE
             ;;
         3|"cfdisk")
             cfdisk
@@ -64,21 +78,41 @@ do
             ;;
     esac
 done
+echo 
 
 # mounting
 
-echo "[ .... ]" mkdir /mnt/boot
-echo "[ .... ]" mount /dev/sda1 /mnt/boot
-echo "[ .... ]" mount /dev/sda3 /mnt
+echo "[ work ] mkdir /mnt/boot" && mkdir /mnt/boot
+echo "[ work ] mount /dev/sda1 /mnt/boot" && mount /dev/sda1 /mnt/boot
+echo "[ work ] mount /dev/sda3 /mnt" && mount /dev/sda3 /mnt
+echo 
 
 # base packages, fstab, chroot
 
-echo "[ .... ]" pacstrap /mnt base base-devel
-echo "[ .... ]" genfstab -U /mnt >> /mnt/etc/fstab
-echo "[ .... ]" arch-chroot /mnt
-echo "[ .... ]" pacman -S nano dhcpcd dbus-broker
+echo "[ work ] install base packages" && pacstrap /mnt base base-devel
+echo "[ work ] genfstab" && genfstab -U /mnt >> /mnt/etc/fstab
+echo "[ work ] arch-chroot" && arch-chroot /mnt
+echo "[ work ] install editor and network utility" && pacman -S nano dhcpcd dbus-broker
+echo 
 
 # time zone, hardware clock
 
-echo "[ .... ]" 
-echo "[ .... ]" 
+echo "[ work ] setup time zone" && ln -sf /usr/share/zoneinfo/$TIMEZONE /etc/localtime
+echo "[ work ] syncronize hardware time" && hwclock --systohc
+echo "[ show ] system time" && timedatectl show
+echo "[ show ] hardware time" && hwclock --show
+echo 
+
+# locale, keymap
+
+echo "[ work ] locale" && sed -i "/^#$LOCALE/ c$LOCALE" /etc/locale.gen
+echo "[ work ] locale" && locale-gen
+echo "[ work ] locale" && echo LANG=$LANGUAGE > /etc/locale.conf
+echo "[ work ] keymap" && echo KEYMAP=$KEYMAP > /etc/vconsole.conf
+echo 
+
+# hostname, password
+
+echo "[ work ] hostname" && echo $HOSTNAME > /etc/hostname
+echo -n "[ work ] USER ─ " && passwd $USERNAME
+echo -n "[ work ] ROOT ─ " && passwd root
