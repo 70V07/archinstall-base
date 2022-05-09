@@ -48,6 +48,13 @@ echo
 
 # partitioning tools
 
+echo "[ info ] partition configuration follows"
+echo "[ info ] the script work with this table"
+echo "[ info ] $DRIVE 1 as boot"
+echo "[ info ] $DRIVE 2 as swap"
+echo "[ info ] $DRIVE 3 as main"
+read -p "Press enter to continue"
+
 # big help from here: https://unix.stackexchange.com/questions/701843/how-to-bash-script-menu-in-one-row-only
 
 PS3='[ menu ] choose partition tool (1) status (2) fdisk (3) cfdisk (4) continue: '
@@ -80,10 +87,18 @@ do
 done
 echo 
 
+# formatting, swapon
+
+echo "[ work ] format partition boot" && mkfs.ext2 /dev/sda1
+#echo "[ work ] format partition boot" && mkfs.fat -F32 /dev/sda1 # UEFI
+echo "[ work ] format partition main" && mkfs.ext4 /dev/sda3
+echo "[ work ] format partition swap" && mkswap /dev/sda2
+echo "[ work ] activate swap" && swapon /dev/sda2
+
 # mounting
 
 echo "[ work ] mkdir /mnt/boot" && mkdir /mnt/boot
-echo "[ work ] mount /dev/sda1 /mnt/boot" && mount /dev/sda1 /mnt/boot
+echo "[ work ] mount /dev/sda1 /mnt/boot" && mount /dev/sda1 /mnt/boot # missing UEFI alternative
 echo "[ work ] mount /dev/sda3 /mnt" && mount /dev/sda3 /mnt
 echo 
 
@@ -122,9 +137,9 @@ echo
 
 # if UEFI uncomment not-UEFI (and viceversa)
 echo "[ work ] boot" && pacman -S grub os-prober
-#echo "[ work ] boot" && pacman -S grub efibootmgr #UEFI
-echo "[ work ] boot" && grub-install /dev/sda
-#echo "[ work ] boot" && grub-install --efi--directory=/efi #UEFI
+#echo "[ work ] boot" && pacman -S grub efibootmgr # UEFI
+echo "[ work ] boot" && grub-install $DRIVE
+#echo "[ work ] boot" && grub-install --efi--directory=/efi # UEFI
 echo "[ work ] boot" && grub-mkconfig -o /boot/grub/grub.cfg
 echo
 
