@@ -48,9 +48,7 @@ echo "[ temp ] clock syncronization"
 } &> /dev/null
 echo 
 
-echo "[ info ] keyboard was temporarily set to $KEYMAP and the clock was synchronized "
 #debug#read -p "Press enter to continue"
-read -p "Press enter to continue"
 
 # partitioning tools
 
