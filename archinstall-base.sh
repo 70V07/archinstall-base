@@ -116,3 +116,17 @@ echo
 echo "[ work ] hostname" && echo $HOSTNAME > /etc/hostname
 echo -n "[ work ] USER ─ " && passwd $USERNAME
 echo -n "[ work ] ROOT ─ " && passwd root
+echo 
+
+# boot loader
+
+# if UEFI uncomment not-UEFI (and viceversa)
+echo "[ work ] boot" && pacman -S grub os-prober
+#echo "[ work ] boot" && pacman -S grub efibootmgr #UEFI
+echo "[ work ] boot" && grub-install /dev/sda
+#echo "[ work ] boot" && grub-install --efi--directory=/efi #UEFI
+echo "[ work ] boot" && grub-mkconfig -o /boot/grub/grub.cfg
+echo
+
+echo now reboot and bypass or disconnect installation support
+echo
