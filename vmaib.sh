@@ -106,6 +106,7 @@ echo
 
 echo "[ work ] install base packages" && pacstrap /mnt base base-devel
 echo "[ work ] genfstab" && genfstab -U /mnt >> /mnt/etc/fstab
-echo "[ work ] arch-chroot" && arch-chroot /mnt / ./vmaibcr.sh
+echo "[ work ] arch-chroot" && arch-chroot /mnt #test
+pacman -S nano dhcpcd dbus-broker #test
 
 # .... switch to archinstall-base_chroot.sh # need to solve "Permission denied"
