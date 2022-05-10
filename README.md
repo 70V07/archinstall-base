@@ -6,9 +6,9 @@
 base, base-devel, grub, os-prober, nano, dhcpcd, dbus-broker, linux-headers, git, sudo, trizen
 ```
 
-*I do not take any responsibility (it is for didactic personal purphoses)*
-
 *files is in constant change (I strike this when I finish the changes)*
+
+*I do not take any responsibility (it is for didactic personal purphoses)*
 
 *for those who want to try the script, from shell (in Arch live medium):*
 ```
