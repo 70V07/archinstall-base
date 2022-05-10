@@ -1,7 +1,7 @@
 
 ## Very Minimal Arch Install Base
 
-####### ! public just to bypass authentication
+###### ! public just to bypass authentication
 
 its a simple script for install Arch Linux whit those packages only:
 ```
