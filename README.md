@@ -3,11 +3,10 @@
 
 ###### ! public just to bypass authentication
 
-its a simple script for install Arch Linux whit those packages only:
+its a simple script for install Arch Linux ready with very minimal configuration and ethernet Internet access, whitout graphical interface; this bash script install those packages only (nothing else):
 ```
 base, base-devel, grub, os-prober, nano, dhcpcd, dbus-broker, linux-headers, git, sudo, trizen
 ```
-ready with minimal configuration and ethernet Internet acces, whitout graphical interface.
 
 *I do not take any responsibility (it is for didactic personal purphoses)*
 
