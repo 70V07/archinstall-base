@@ -2,9 +2,9 @@
 ## Very Minimal Arch Install Base
 
 its a simple script for install Arch Linux whit those packages only:
-
-  base, base-devel, grub, os-prober, nano, dhcpcd, dbus-broker, linux-headers, git, sudo, trizen
-  
+```
+base, base-devel, grub, os-prober, nano, dhcpcd, dbus-broker, linux-headers, git, sudo, trizen
+```
 ready with minimal configuration and ethernet Internet acces, whitout graphical interface.
 
 ##### ! public just to bypass authentication
@@ -15,15 +15,7 @@ ready with minimal configuration and ethernet Internet acces, whitout graphical 
 
 **for those who want to try the script, from shell (in Arch live medium):**
 ```
-  cd \
+cd \ && mkdir temp-git && cd temp-git && pacman -Sy git
   
-  mkdir temp-git
-  
-  cd temp-git
-  
-  pacman -Sy git
-  
-  git clone https://github.com/70V07/vmaib.git
-  
-  bash archinstall-base.sh
+git clone https://github.com/70V07/vmaib.git && vmaib.sh
 ```
