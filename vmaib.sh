@@ -44,6 +44,8 @@ echo "[ temp ] keyboard layout" && loadkeys $KEYMAP
 
 echo "[ temp ] clock syncronization" && timedatectl set-ntp true # find how wait all output before continue
 echo 
+read -p "press enter to continue"
+echo 
 
 # partitioning tools
 
@@ -93,6 +95,7 @@ echo "[ work ] format partition boot" && mkfs.ext2 /dev/sda1
 echo "[ work ] format partition main" && mkfs.ext4 /dev/sda3
 echo "[ work ] format partition swap" && mkswap /dev/sda2
 echo "[ work ] activate swap" && swapon /dev/sda2
+read -p "press enter to continue"
 echo 
 
 # mounting
@@ -100,13 +103,13 @@ echo
 echo "[ work ] mkdir /mnt/boot" && mkdir /mnt/boot
 echo "[ work ] mount /dev/sda1 /mnt/boot" && mount /dev/sda1 /mnt/boot # missing UEFI alternative
 echo "[ work ] mount /dev/sda3 /mnt" && mount /dev/sda3 /mnt
+read -p "press enter to continue"
 echo 
 
-# base packages, fstab, chroot
+# minimal packages, genfstab, entering chroot
 
-echo "[ work ] install base packages" && pacstrap /mnt base base-devel
+echo "[ work ] install minimal packages" && pacstrap /mnt base base-devel nano dhcpcd dbus-broker
 echo "[ work ] genfstab" && genfstab -U /mnt >> /mnt/etc/fstab
-echo "[ work ] arch-chroot" && arch-chroot /mnt #test
-pacman -S nano dhcpcd dbus-broker #test
+echo "[ work ] arch-chroot" && cp -R /temp-git /mnt && arch-chroot /mnt { "bash /temp-git/vmaibcr.sh" }
 
-# .... switch to archinstall-base_chroot.sh # need to solve "Permission denied"
+# switch to vmaibcr.sh
