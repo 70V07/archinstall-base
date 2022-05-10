@@ -14,5 +14,5 @@ base, base-devel, grub, os-prober, nano, dhcpcd, dbus-broker, linux-headers, git
 ```
 cd / && mkdir temp-git && cd temp-git && pacman -Sy git
   
-git clone https://github.com/70V07/vmaib.git && vmaib.sh
+git clone https://github.com/70V07/vmaib.git && cd vmaib && vmaib.sh
 ```
