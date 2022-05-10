@@ -1,7 +1,7 @@
 
 ## Very Minimal Arch Install Base
 
-**! public just to bypass authentication** // its just a simple script for install Arch Linux ready with very minimal configuration and ethernet Internet access, whitout graphical interface; this bash script install those packages only:
+**! public just to bypass authentication** ─ its just a simple script for install Arch Linux ready with very minimal configuration and ethernet Internet access, whitout graphical interface; this bash script install those packages only:
 ```
 base, base-devel, grub, os-prober, nano, dhcpcd, dbus-broker, linux-headers, git, sudo, trizen
 ```
