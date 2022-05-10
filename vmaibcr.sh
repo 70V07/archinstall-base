@@ -31,5 +31,7 @@ echo "[ work ] boot" && grub-install $DRIVE
 echo "[ work ] boot" && grub-mkconfig -o /boot/grub/grub.cfg
 echo
 
-echo now reboot and bypass or disconnect installation support
+echo "now reboot and bypass or disconnect installation support"
+echo "first exit from chroot, for exit from chroot type:  exit"
+echo "after the reboot clone again VMAIB "
 echo
