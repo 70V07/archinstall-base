@@ -114,6 +114,6 @@ echo
 
 echo "[ work ] install minimal packages" && pacstrap /mnt base base-devel nano dhcpcd dbus-broker
 echo "[ work ] genfstab" && genfstab -U /mnt >> /mnt/etc/fstab
-echo "[ work ] arch-chroot" && cp -R /temp-git /mnt && arch-chroot /mnt { "bash /temp-git/vmaib/vmaibcr.sh" }
+echo "[ work ] arch-chroot" && cp -R /temp-git /mnt && arch-chroot /mnt { "bash /temp-git/vmaib/vmaibcr.sh" } # not work
 
 # switch to vmaibcr.sh
