@@ -1,4 +1,7 @@
 #!/bin/bash
+
+# for debug add after any command you want debug: -p "press enter to continue"
+
 echo 
 echo "                                                      /"
 echo "                                                     /oo"
@@ -56,7 +59,9 @@ echo "[ info ] the script work with this table"
 echo "[ info ] $DRIVE 1 as boot"
 echo "[ info ] $DRIVE 2 as swap"
 echo "[ info ] $DRIVE 3 as main"
+echo 
 read -p "press enter to continue"
+echo 
 
 # big help from here: https://unix.stackexchange.com/questions/701843/how-to-bash-script-menu-in-one-row-only
 
@@ -97,7 +102,6 @@ echo "[ work ] format partition boot" && mkfs.ext2 /dev/sda1
 echo "[ work ] format partition main" && mkfs.ext4 /dev/sda3
 echo "[ work ] format partition swap" && mkswap /dev/sda2
 echo "[ work ] activate swap" && swapon /dev/sda2
-read -p "press enter to continue"
 echo 
 
 # mounting
@@ -105,7 +109,6 @@ echo
 echo "[ work ] mkdir /mnt/boot" && mkdir /mnt/boot
 echo "[ work ] mount /dev/sda1 /mnt/boot" && mount /dev/sda1 /mnt/boot # missing UEFI alternative
 echo "[ work ] mount /dev/sda3 /mnt" && mount /dev/sda3 /mnt
-read -p "press enter to continue"
 echo 
 
 # minimal packages, genfstab, entering chroot
