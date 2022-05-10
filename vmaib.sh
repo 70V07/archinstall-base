@@ -1,7 +1,4 @@
 #!/bin/bash
-
-# for debug add after any command you want debug: -p "press enter to continue"
-
 echo 
 echo "                                                      /"
 echo "                                                     /oo"
@@ -29,6 +26,8 @@ echo " Marco Colonna  aka TOVOT  29─03─1982  email : arbitrio@altervista.com
 echo " _____________________________________________________________________ "
 echo 
 
+# for debug add after any command you want debug: -p "press enter to continue"
+
 # auto configuration from script
 
 DRIVE='/dev/sda'
@@ -47,9 +46,9 @@ echo "[ temp ] keyboard layout" && loadkeys $KEYMAP
 
 # temporary clock syncronization
 
-echo "[ temp ] clock syncronization" && timedatectl set-ntp true # find how wait all output before continue
+echo "[ temp ] clock syncronization" && timedatectl set-ntp true
 echo 
-read -p "press enter to continue"
+read -p "press enter to continue" # find how to wait all output from timedatectl before continue
 echo 
 
 # partitioning tools
