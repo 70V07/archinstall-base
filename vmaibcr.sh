@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# for debug add after any command you want debug: -p "press enter to continue"
+
 # time zone, hardware clock
 
 echo "[ work ] setup time zone" && ln -sf /usr/share/zoneinfo/$TIMEZONE /etc/localtime
