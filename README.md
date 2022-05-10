@@ -15,7 +15,7 @@
   
   pacman -Sy git
   
-  git clone https://github.com/70V07/archinstall-base.git
+  git clone https://github.com/70V07/vmaib.git
   
   bash archinstall-base.sh
 ```
