@@ -12,7 +12,7 @@ base, base-devel, grub, os-prober, nano, dhcpcd, dbus-broker, linux-headers, git
 
 *for those who want to try the script, from shell (in Arch live medium):*
 ```
-cd / && mkdir temp-git && cd temp-git && pacman -S git
+cd / && mkdir temp-git && cd temp-git && pacman -Sy git
   
 git clone https://github.com/70V07/vmaib.git && cd vmaib
 
