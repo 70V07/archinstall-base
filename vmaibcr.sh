@@ -1,8 +1,5 @@
 #!/bin/bash
 
-echo "[ work ] install editor and network utility" && pacman -S nano dhcpcd dbus-broker
-echo 
-
 # time zone, hardware clock
 
 echo "[ work ] setup time zone" && ln -sf /usr/share/zoneinfo/$TIMEZONE /etc/localtime
