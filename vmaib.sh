@@ -106,7 +106,6 @@ echo
 
 echo "[ work ] install base packages" && pacstrap /mnt base base-devel
 echo "[ work ] genfstab" && genfstab -U /mnt >> /mnt/etc/fstab
-cp archinstall-base_chroot.sh /mnt
 echo "[ work ] arch-chroot" && arch-chroot /mnt / ./vmaibcr.sh
 
 # .... switch to archinstall-base_chroot.sh # need to solve "Permission denied"
