@@ -1,3 +1,5 @@
+> [!NOTE]
+> this repository it is abandoned to the cosmic void, in the sense that I have not continued this experiment...
 
 ## Very Minimal Arch Install Base ( currently malfunctioning and incomplete )
 
